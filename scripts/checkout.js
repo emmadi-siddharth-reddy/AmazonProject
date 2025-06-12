@@ -4,6 +4,7 @@ import { formatCurrency } from "./utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import {deliveryOptions} from "../data/deliveryOptions.js";
 
+function renderOrderSummary(){
 
 let cartSummaryHTML = "";
 
@@ -122,6 +123,7 @@ document.querySelectorAll('.js-update-link').forEach((link) => {
     link.addEventListener('click', () => {
         const productId = link.dataset.productId;
         updateInCart(productId);
+        renderOrderSummary();
     });
 });
 
@@ -130,6 +132,9 @@ document.querySelector('.cart-quantity-count').innerHTML=`${cart.length} Items`;
 document.querySelectorAll('.js-deliver-options').forEach((element) => {
     element.addEventListener('click', () => {
         const {productId, deliveryOptionId} = element.dataset;
-        updateDeliveryOption(productId, deliveryOptionId)
+        updateDeliveryOption(productId, deliveryOptionId);
+        renderOrderSummary();
     });
 });
+}
+renderOrderSummary();
